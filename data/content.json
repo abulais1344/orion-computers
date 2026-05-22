@@ -1,0 +1,212 @@
+{
+  "business": {
+    "name": "Orion Computers",
+    "city": "Nanded",
+    "tagline": "Trusted Computer Sales & Service Since 1999",
+    "subheadline": "Laptops, Repairs, Accessories & Business Tech Solutions",
+    "description": "For more than two decades, Orion Computers has served students, families, offices, and businesses in Nanded with genuine products, dependable service, and practical technology advice.",
+    "since": "1999",
+    "phonePrimary": "+91 98231 25503",
+    "phoneSecondary": "+91 72496 25503",
+    "whatsapp": "+919823125503",
+    "email": "orion_nan@hotmail.com",
+    "address": "Ground Floor, Mahatma Phule Market, Shop No. 38, ITI Rd, near Chandu kaka Saraf Jewels, Shivaji Nagar, Nanded, Maharashtra 431602",
+    "timings": "Mon - Sat: 10:00 AM - 8:30 PM | Sun: 11:00 AM - 4:00 PM",
+    "mapEmbedUrl": "https://www.google.com/maps?q=Mahatma+Phule+Market+ITI+Rd+Shivaji+Nagar+Nanded+Maharashtra+431602&z=16&output=embed",
+    "directionsUrl": "https://maps.google.com/?q=Mahatma+Phule+Market,+ITI+Rd,+Shivaji+Nagar,+Nanded,+Maharashtra+431602",
+    "instagram": "https://instagram.com/orion_computers_nanded",
+    "facebook": "https://facebook.com/orioncomputersnanded"
+  },
+  "heroImages": [
+    {
+      "src": "/2025-11-04.webp",
+      "alt": "Orion Computers night storefront with illuminated signage"
+    },
+    {
+      "src": "/orion-logo.jpg",
+      "alt": "Orion showroom wall branding and desktop display"
+    },
+    {
+      "src": "/orion_inside.jpg",
+      "alt": "Orion Computers interior with shelves and customer desk"
+    }
+  ],
+  "trustCards": [
+    {
+      "title": "Since 1999",
+      "description": "Established local business with long-standing customer trust."
+    },
+    {
+      "title": "Genuine Products",
+      "description": "Original brands, verified accessories, and reliable warranties."
+    },
+    {
+      "title": "Expert Support",
+      "description": "Guidance for students, offices, and business buyers."
+    },
+    {
+      "title": "Fast Service",
+      "description": "Quick diagnosis, prompt repair handling, and clear communication."
+    }
+  ],
+  "categories": [
+    {
+      "title": "Laptops",
+      "description": "Daily-use, office, student, and performance laptops from trusted brands.",
+      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "title": "Gaming PCs",
+      "description": "Custom desktops, monitors, and upgrades built for speed and stability.",
+      "image": "/orion-pag-pano.jpg"
+    },
+    {
+      "title": "Printers",
+      "description": "Home and office printers with installation support and consumables.",
+      "image": "/2026-05-09.webp"
+    },
+    {
+      "title": "Accessories",
+      "description": "Keyboards, mice, bags, chargers, cables, speakers, and more.",
+      "image": "/orion-essentials.jpg"
+    },
+    {
+      "title": "SSD/RAM Upgrade",
+      "description": "Upgrade older systems for better speed, startup, and multitasking.",
+      "image": "https://images.unsplash.com/photo-1562976540-1502c2145186?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "title": "Networking",
+      "description": "Routers, switches, office networking, and structured setup help.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
+    }
+  ],
+  "services": [
+    "Laptop Repair",
+    "Desktop Repair",
+    "Printer Service",
+    "Windows Installation",
+    "SSD Upgrade",
+    "Data Recovery"
+  ],
+  "featuredProducts": [
+    {
+      "title": "MSI PAG PANO M110A Gaming Cabinet",
+      "specs": "Tempered glass, 3 pre-installed RGB fans, magnetic filter, top 240mm liquid cooling support",
+      "image": "/orion-pag-pano.jpg",
+      "price": "₹52,990",
+      "oldPrice": "₹57,490",
+      "badge": "Limited Stock"
+    },
+    {
+      "title": "MacBook In-Store Offer",
+      "specs": "Premium laptop range available with genuine billing and local support",
+      "image": "/macbook.jpeg",
+      "price": "₹64,900",
+      "oldPrice": "₹69,900",
+      "badge": "Offer Price"
+    },
+    {
+      "title": "Orion Accessories Essentials",
+      "specs": "Chargers, cables, adapters, storage, and day-to-day PC accessories",
+      "image": "/orion-essentials.jpg",
+      "price": "₹44,500",
+      "oldPrice": "₹48,990",
+      "badge": "Best Seller"
+    },
+    {
+      "title": "Store Walk-in Deals",
+      "specs": "Latest laptop, printer, and accessories offers available directly at showroom",
+      "image": "/orion-outside-2.jpg",
+      "price": "₹18,999",
+      "oldPrice": "₹22,500",
+      "badge": "Visit Store"
+    }
+  ],
+  "inStoreOffers": [
+    {
+      "title": "Gaming Cabinet Offer",
+      "subtitle": "MSI PAG PANO M110A now available with in-store build consultation.",
+      "image": "/orion-pag-pano.jpg",
+      "ctaText": "Enquire Cabinet"
+    },
+    {
+      "title": "Laptop Desk Deals",
+      "subtitle": "Walk in for live laptop demos, student pricing, and same-day guidance.",
+      "image": "/orion_inside.jpg",
+      "ctaText": "Enquire Laptop"
+    },
+    {
+      "title": "Accessories Combo Offers",
+      "subtitle": "Chargers, adapters, keyboards, cables, and essentials in one place.",
+      "image": "/orion-essentials.jpg",
+      "ctaText": "Enquire Accessories"
+    }
+  ],
+  "whyChooseUs": [
+    "Trusted local business with consistent service since 1999.",
+    "Genuine products from reliable brands with practical recommendations.",
+    "Experienced support for students, offices, and business buyers.",
+    "Strong after-sales service for upgrades, setup, and repairs.",
+    "Complete solutions for laptops, printers, upgrades, and networking.",
+    "Fast response on WhatsApp and phone for quick local enquiries."
+  ],
+  "reviews": [
+    {
+      "name": "Kedar Jamkar",
+      "role": "Laptop Buyer",
+      "rating": 5,
+      "text": "I recently purchased my laptop from Orion Computers, and I'm extremely happy with the experience. Their customer support is very humble and responsive, always ready to help. They offered me a very good price, better than what I found elsewhere. The owner personally attended me, which made the whole process smooth and trustworthy. After-sales support is quick and genuine, which builds confidence.",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "name": "kavita mane",
+      "role": "PC Builder",
+      "rating": 5,
+      "text": "I'm very happy with my new PC build. All components were properly installed and cable management is clean. The system boots fast, runs smoothly, and handles gaming and daily work without any lag. Temperatures are stable and noise levels are low. Overall, a solid and well-balanced build. Great value for money.",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "name": "Gaurang Wadhwa",
+      "role": "Local Guide",
+      "rating": 5,
+      "text": "Excellent service! They were very supportive and patiently helped me choose the right configuration for my requirements. The desktop was assembled quickly and works perfectly. Really happy with the overall experience.",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "name": "Ulhas Patki",
+      "role": "Lab Manager",
+      "rating": 5,
+      "text": "Excellent service! I had several lab PCs repaired at Orion Computer Nanded. Being in the CS field, I appreciate their transparency in diagnosing hardware faults and their use of genuine components. The turnaround time was impressive, and the systems are running perfectly. Highly recommended.",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "name": "Shubham Sharan",
+      "role": "Local Guide",
+      "rating": 5,
+      "text": "I went here for my laptop repair and had an excellent experience. They helped me quickly, used genuine parts, and the repair charges were very reasonable. Their experienced engineers are very knowledgeable and quickly identified the real issue with my laptop and fixed it in no time. I highly recommend Orion Computer to everyone.",
+      "avatar": "https://images.unsplash.com/photo-1500595046891-8088cf92bfb9?auto=format&fit=crop&w=200&q=80"
+    }
+  ],
+  "brands": [
+    "HP",
+    "Dell",
+    "Lenovo",
+    "ASUS",
+    "Acer",
+    "Canon",
+    "Samsung",
+    "MSI"
+  ],
+  "seo": {
+    "title": "Orion Computers, Nanded | Laptop Store, Repairs & Accessories",
+    "description": "Orion Computers is a trusted computer shop in Nanded since 1999 for laptops, computer accessories, printer sales, laptop repair, and business tech solutions.",
+    "keywords": [
+      "Laptop Store in Nanded",
+      "Computer Shop in Nanded",
+      "Laptop Repair in Nanded",
+      "Computer showroom Nanded",
+      "Printer shop Nanded"
+    ]
+  }
+}
