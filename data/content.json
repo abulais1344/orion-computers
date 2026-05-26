@@ -1,0 +1,120 @@
+{
+  "business": {
+    "name": "Orion Computers",
+    "city": "Nanded",
+    "tagline": "Trusted Computer Sales & Service Since 1999",
+    "subheadline": "Laptops, Repairs, CCTV & Accessories in Nanded",
+    "description": "Trusted local computer showroom for sales, service, and practical support.",
+    "since": "1999",
+    "phonePrimary": "+91 98231 25503",
+    "phoneSecondary": "+91 72496 25503",
+    "whatsapp": "+919823125503",
+    "email": "orion_nan@hotmail.com",
+    "address": "Ground Floor, Mahatma Phule Market, Shop No. 38, ITI Rd, near Chandu kaka Saraf Jewels, Shivaji Nagar, Nanded, Maharashtra 431602, India",
+    "timings": "Mon - Sat: 10:00 AM - 8:30 PM | Sun: 11:00 AM - 4:00 PM",
+    "mapEmbedUrl": "https://www.google.com/maps?q=Mahatma+Phule+Market+ITI+Rd+Shivaji+Nagar+Nanded+Maharashtra+431602&z=16&output=embed",
+    "directionsUrl": "https://maps.google.com/?q=Mahatma+Phule+Market,+ITI+Rd,+Shivaji+Nagar,+Nanded,+Maharashtra+431602",
+    "googleBusinessUrl": "https://www.google.com/search?q=Orion+Computers+Laptop+%26+PC+Shop+Nanded",
+    "instagram": "https://instagram.com/orion_computers_nanded",
+    "facebook": "https://facebook.com/orioncomputersnanded"
+  },
+  "heroImages": [
+    {
+      "src": "/orion-images/1779610081635-screenshot-2026-05-22-at-12.56.45-am.png",
+      "alt": "Orion Computers storefront – Nanded"
+    },
+    {
+      "src": "/orion-images/hero-mobile.png",
+      "alt": "Orion Computers side wall signage"
+    }
+  ],
+  "galleryImages": [
+    {
+      "src": "/orion-images/hero-mobile.png",
+      "alt": "Orion Computers day view"
+    },
+    {
+      "src": "/orion-images/services.png",
+      "alt": "Products and accessories"
+    },
+    {
+      "src": "/orion-images/store-view.png",
+      "alt": "Store interior"
+    }
+  ],
+  "categories": [
+    {
+      "title": "Laptops",
+      "description": "Laptop sales and guidance",
+      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "title": "Gaming PCs",
+      "description": "Custom gaming builds",
+      "image": "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "title": "Printers",
+      "description": "Printer sales and service",
+      "image": "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "title": "Accessories",
+      "description": "Computer accessories",
+      "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=900&q=80"
+    }
+  ],
+  "services": [
+    "Laptop Repair",
+    "Desktop Repair",
+    "Printer Service",
+    "Windows Installation",
+    "SSD Upgrade",
+    "Data Recovery"
+  ],
+  "reviews": [
+    {
+      "name": "Faiz Saudagar",
+      "role": "3 reviews · 1 photo",
+      "rating": 5,
+      "text": "Fantastic experience. Got an RGB gaming keyboard and mouse combo at a great discount. Helpful staff and fast checkout."
+    },
+    {
+      "name": "Dnyaneshwar Arsole",
+      "role": "Customer",
+      "rating": 5,
+      "text": "Good experience buying a monitor from Orion Computers. Staff explained features clearly and the product is genuine."
+    },
+    {
+      "name": "Priyanka Jondhale",
+      "role": "2 reviews",
+      "rating": 5,
+      "text": "Very good experience for laptop purchase. Cooperative staff and very good service."
+    },
+    {
+      "name": "Jaspreet Manesh",
+      "role": "Local Guide · 23 reviews",
+      "rating": 5,
+      "text": "Excellent repair centre with prompt service. Coordination is smooth and easy. Definitely recommended."
+    }
+  ],
+  "brands": [
+    "HP",
+    "Dell",
+    "Lenovo",
+    "ASUS",
+    "Acer",
+    "MSI",
+    "Canon",
+    "Samsung"
+  ],
+  "seo": {
+    "title": "Orion Computers, Nanded",
+    "description": "Trusted local computer showroom in Nanded since 1999.",
+    "keywords": [
+      "Laptop Store in Nanded",
+      "Computer Shop in Nanded",
+      "Laptop Repair in Nanded"
+    ]
+  }
+}
