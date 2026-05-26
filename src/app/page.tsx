@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { ImageGallery } from "@/components/ImageGallery";
 import { BrandCarousel } from "@/components/BrandCarousel";
+import { Header } from "@/components/Header";
 
 type SiteContent = {
   business: {
@@ -77,15 +78,7 @@ export default function Home() {
 
   return (
     <main className="pb-28">
-      <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-white/95 backdrop-blur">
-        <div className="page-shell flex items-center justify-between py-3">
-          <div>
-            <p className="text-sm font-black tracking-[0.2em] text-[var(--primary-dark)] uppercase">Orion Computers</p>
-            <p className="text-xs text-[var(--muted)]">Trusted in Nanded since 1999</p>
-          </div>
-          <a href={phoneHref} className="chip-link">Call Store</a>
-        </div>
-      </header>
+      <Header phoneHref={phoneHref} />
 
       <section id="hero" className="page-shell pt-5 md:pt-8">
         <div className="hero-panel grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
