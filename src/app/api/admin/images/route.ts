@@ -116,7 +116,35 @@ export async function DELETE(request: Request) {
   try {
     const supabase = getSupabaseAdminClient();
 
-    const body = (await request.json()) as { fileName?: string };
+    const body = (await request.json()) as { fileName?: string; deleteAll?: boolean };
+
+    if (body.deleteAll) {
+      const { data, error: listError } = await supabase.storage.from(IMAGES_BUCKET).list("", {
+        limit: 1000,
+        sortBy: { column: "name", order: "asc" },
+      });
+
+      if (listError) {
+        console.error("Supabase list error:", listError);
+        return NextResponse.json({ error: "Failed to load images for deletion." }, { status: 500 });
+      }
+
+      const fileNames = (data || []).map((file) => file.name).filter(Boolean);
+
+      if (fileNames.length === 0) {
+        return NextResponse.json({ ok: true, deletedCount: 0 });
+      }
+
+      const { error: deleteError } = await supabase.storage.from(IMAGES_BUCKET).remove(fileNames);
+
+      if (deleteError) {
+        console.error("Supabase bulk delete error:", deleteError);
+        return NextResponse.json({ error: "Failed to delete uploaded images." }, { status: 500 });
+      }
+
+      return NextResponse.json({ ok: true, deletedCount: fileNames.length });
+    }
+
     const fileName = body.fileName?.trim();
 
     if (!fileName) {

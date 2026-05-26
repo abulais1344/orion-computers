@@ -212,6 +212,41 @@ export default function AdminDashboard() {
     }
   }
 
+  async function onDeleteAllImages() {
+    if (!window.confirm("Delete all uploaded images from the bucket? This cannot be undone.")) return;
+
+    setIsBusy(true);
+    showNotice("info", "Deleting all uploaded images...");
+
+    try {
+      const res = await fetch("/api/admin/images", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deleteAll: true }),
+      });
+
+      if (res.status === 401) {
+        showNotice("error", "Session expired. Please login again.");
+        redirectToLogin();
+        return;
+      }
+
+      const data = (await res.json()) as { error?: string; deletedCount?: number };
+
+      if (!res.ok) {
+        showNotice("error", data.error || "Delete all failed.");
+        return;
+      }
+
+      setImages([]);
+      showNotice("success", `Deleted ${data.deletedCount || 0} uploaded images.`);
+    } catch {
+      showNotice("error", "Delete all failed.");
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
   async function onSaveLayout() {
     if (!isLayoutDirty) {
       showNotice("info", "No layout changes to save.");
@@ -475,8 +510,20 @@ export default function AdminDashboard() {
         </section>
 
         <section className="rounded-2xl border border-[var(--line)] bg-white p-5">
-          <h2 className="text-lg font-semibold text-[var(--foreground)]">Uploaded Images</h2>
-          <p className="mt-1 text-xs text-[var(--muted)]">Total uploaded: {images.length}</p>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 className="text-lg font-semibold text-[var(--foreground)]">Uploaded Images</h2>
+              <p className="mt-1 text-xs text-[var(--muted)]">Total uploaded: {images.length}</p>
+            </div>
+            <button
+              type="button"
+              onClick={onDeleteAllImages}
+              className="rounded-full border border-[#e5c1c1] px-3 py-1.5 text-xs font-semibold text-[#a33a3a]"
+              disabled={isBusy || images.length === 0}
+            >
+              Delete all uploaded images
+            </button>
+          </div>
           {images.length === 0 ? (
             <p className="mt-4 rounded-lg border border-dashed border-[var(--line)] p-4 text-sm text-[var(--muted)]">
               No uploaded images yet. Use Step 1 above to add your first image.
