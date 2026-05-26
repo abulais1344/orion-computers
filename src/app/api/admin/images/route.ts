@@ -1,7 +1,8 @@
+import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { supabase, IMAGES_BUCKET } from "@/lib/supabase-admin";
+import { getSupabaseAdminClient, IMAGES_BUCKET } from "@/lib/supabase-admin";
 
 const ALLOWED_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"]);
 
@@ -23,6 +24,8 @@ export async function GET() {
   }
 
   try {
+    const supabase = getSupabaseAdminClient();
+
     const { data, error } = await supabase.storage.from(IMAGES_BUCKET).list("", {
       limit: 1000,
       sortBy: { column: "name", order: "asc" },
@@ -53,6 +56,8 @@ export async function POST(request: Request) {
   }
 
   try {
+    const supabase = getSupabaseAdminClient();
+
     const formData = await request.formData();
     const file = formData.get("file");
 
@@ -72,7 +77,7 @@ export async function POST(request: Request) {
     }
 
     const base = sanitizeBaseName(path.basename(originalName, ext)) || "image";
-    const stampedName = `${Date.now()}-${base}${ext}`;
+    const stampedName = `${Date.now()}-${randomUUID()}-${base}${ext}`;
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
@@ -109,6 +114,8 @@ export async function DELETE(request: Request) {
   }
 
   try {
+    const supabase = getSupabaseAdminClient();
+
     const body = (await request.json()) as { fileName?: string };
     const fileName = body.fileName?.trim();
 

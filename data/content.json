@@ -18,30 +18,8 @@
     "instagram": "https://instagram.com/orion_computers_nanded",
     "facebook": "https://facebook.com/orioncomputersnanded"
   },
-  "heroImages": [
-    {
-      "src": "/orion-images/1779610081635-screenshot-2026-05-22-at-12.56.45-am.png",
-      "alt": "Orion Computers storefront – Nanded"
-    },
-    {
-      "src": "/orion-images/hero-mobile.png",
-      "alt": "Orion Computers side wall signage"
-    }
-  ],
-  "galleryImages": [
-    {
-      "src": "/orion-images/hero-mobile.png",
-      "alt": "Orion Computers day view"
-    },
-    {
-      "src": "/orion-images/services.png",
-      "alt": "Products and accessories"
-    },
-    {
-      "src": "/orion-images/store-view.png",
-      "alt": "Store interior"
-    }
-  ],
+  "heroImages": [],
+  "galleryImages": [],
   "categories": [
     {
       "title": "Laptops",

@@ -67,49 +67,46 @@ export default function Home() {
   );
   const googleBusinessHref = content.business.googleBusinessUrl || content.business.directionsUrl;
 
-  const galleryImages =
-    content.galleryImages && content.galleryImages.length > 0
-      ? content.galleryImages
-      : [
-          { src: "/orion-images/hero-mobile.png", alt: "Orion Computers day view" },
-          { src: "/orion-images/services.png", alt: "Products and accessories" },
-          { src: "/orion-images/store-view.png", alt: "Store interior" },
-        ];
+  const galleryImages = content.galleryImages || [];
 
   return (
     <main className="pb-28">
       <Header phoneHref={phoneHref} />
 
-      <section id="hero" className="page-shell pt-5 md:pt-8">
-        <div className="hero-panel grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <div className="mb-4 flex flex-wrap gap-2">
-              <span className="trust-chip">Authorized Dealer Since 1999</span>
-            </div>
-            <h1 className="hero-title">Trusted Computer Sales &amp; Service Since 1999</h1>
-            <p className="mt-3 max-w-xl text-base leading-7 text-[var(--muted)] md:text-lg">
-              Laptops, Repairs, CCTV &amp; Accessories in Nanded.
-            </p>
+      {content.heroImages.length > 0 ? (
+        <section id="hero" className="page-shell pt-5 md:pt-8">
+          <div className="hero-panel grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <div className="mb-4 flex flex-wrap gap-2">
+                <span className="trust-chip">Authorized Dealer Since 1999</span>
+              </div>
+              <h1 className="hero-title">Trusted Computer Sales &amp; Service Since 1999</h1>
+              <p className="mt-3 max-w-xl text-base leading-7 text-[var(--muted)] md:text-lg">
+                Laptops, Repairs, CCTV &amp; Accessories in Nanded.
+              </p>
 
-            <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
-              <a href={whatsappHref} className="button-primary text-center">WhatsApp Now</a>
-              <a href={phoneHref} className="button-secondary text-center">Call Store</a>
+              <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
+                <a href={whatsappHref} className="button-primary text-center">WhatsApp Now</a>
+                <a href={phoneHref} className="button-secondary text-center">Call Store</a>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="trust-chip text-[11px]">HP | Dell | Lenovo | MSI</span>
+                <span className="trust-chip text-[11px]">Genuine Products</span>
+                <span className="trust-chip text-[11px]">10,000+ Customers</span>
+                <span className="trust-chip text-[11px]">25+ Years Experience</span>
+              </div>
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <span className="trust-chip text-[11px]">HP | Dell | Lenovo | MSI</span>
-              <span className="trust-chip text-[11px]">Genuine Products</span>
-              <span className="trust-chip text-[11px]">10,000+ Customers</span>
-              <span className="trust-chip text-[11px]">25+ Years Experience</span>
-            </div>
+
+            <ImageGallery images={content.heroImages.slice(0, 2)} variant="hero" />
           </div>
+        </section>
+      ) : null}
 
-          <ImageGallery images={content.heroImages.slice(0, 2)} variant="hero" />
-        </div>
-      </section>
-
-      <section className="page-shell mt-5">
-        <ImageGallery images={galleryImages} variant="strip" />
-      </section>
+      {galleryImages.length > 0 ? (
+        <section className="page-shell mt-5">
+          <ImageGallery images={galleryImages} variant="strip" />
+        </section>
+      ) : null}
 
       <section id="reviews" className="page-shell mt-8 md:mt-10">
         <div className="mb-3 flex items-center justify-between gap-3">

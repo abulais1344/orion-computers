@@ -20,6 +20,16 @@ type Notice = {
   text: string;
 };
 
+function formatImageLabel(fileName: string) {
+  const readableName = fileName.replace(/^\d+-[a-f0-9-]{10,}-/i, "");
+
+  if (readableName.length <= 42) {
+    return readableName;
+  }
+
+  return `${readableName.slice(0, 24)}...${readableName.slice(-14)}`;
+}
+
 export default function AdminDashboard() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -35,7 +45,10 @@ export default function AdminDashboard() {
   const [notice, setNotice] = useState<Notice | null>(null);
   const [isBusy, setIsBusy] = useState(false);
 
-  const imageOptions = useMemo(() => images.map((img) => img.src), [images]);
+  const imageOptions = useMemo(
+    () => images.map((img) => ({ value: img.src, label: formatImageLabel(img.fileName) })),
+    [images]
+  );
   const filledHeroCount = useMemo(() => heroImages.filter((item) => item.src).length, [heroImages]);
   const filledGalleryCount = useMemo(() => galleryImages.filter((item) => item.src).length, [galleryImages]);
   const isLayoutDirty = useMemo(() => {
@@ -79,7 +92,9 @@ export default function AdminDashboard() {
     };
 
     const hero = (data.heroImages || []).slice(0, 2);
-    while (hero.length < 2) hero.push({ src: "", alt: `Hero image ${hero.length + 1}` });
+    if (hero.length === 0) {
+      hero.push({ src: "", alt: "Hero image 1" });
+    }
 
     const gallery = (data.galleryImages || []).slice(0, 30);
     if (gallery.length === 0) {
@@ -233,6 +248,12 @@ export default function AdminDashboard() {
     } finally {
       setIsBusy(false);
     }
+  }
+
+  function clearHomepageLayout() {
+    setHeroImages([{ src: "", alt: "Hero image 1" }]);
+    setGalleryImages([{ src: "", alt: "Gallery image 1" }]);
+    showNotice("info", "Homepage images cleared. Save to publish the clean layout.");
   }
 
   async function onLogout() {
@@ -394,8 +415,8 @@ export default function AdminDashboard() {
                   disabled={isBusy}
                 >
                   <option value="">Select image</option>
-                  {imageOptions.map((src) => (
-                    <option key={src} value={src}>{src}</option>
+                  {imageOptions.map((image) => (
+                    <option key={image.value} value={image.value}>{image.label}</option>
                   ))}
                 </select>
               </label>
@@ -423,22 +444,32 @@ export default function AdminDashboard() {
                   disabled={isBusy}
                 >
                   <option value="">Select image</option>
-                  {imageOptions.map((src) => (
-                    <option key={src} value={src}>{src}</option>
+                  {imageOptions.map((image) => (
+                    <option key={image.value} value={image.value}>{image.label}</option>
                   ))}
                 </select>
               </div>
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={addGallerySlot}
-            className="button-secondary mt-3 inline-flex"
-            disabled={isBusy || galleryImages.length >= 30}
-          >
-            Add Another Gallery Image Slot
-          </button>
+          <div className="mt-3 flex flex-col gap-2.5 sm:flex-row">
+            <button
+              type="button"
+              onClick={addGallerySlot}
+              className="button-secondary inline-flex"
+              disabled={isBusy || galleryImages.length >= 30}
+            >
+              Add Another Gallery Image Slot
+            </button>
+            <button
+              type="button"
+              onClick={clearHomepageLayout}
+              className="text-sm font-semibold text-[#a33a3a] underline"
+              disabled={isBusy}
+            >
+              Clear homepage images
+            </button>
+          </div>
 
           <button onClick={onSaveLayout} className="button-primary mt-4 inline-flex" disabled={isBusy}>Step 3: Save Image Layout</button>
         </section>
