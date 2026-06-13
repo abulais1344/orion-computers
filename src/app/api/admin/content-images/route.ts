@@ -1,17 +1,27 @@
-import { readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getSupabaseAdminClient, IMAGES_BUCKET } from "@/lib/supabase-admin";
 
 type ImageItem = {
   src: string;
   alt: string;
 };
 
-const CONTENT_PATH = path.join(process.cwd(), "data", "content.json");
+const LAYOUT_FILE = "_layout.json";
+
+function getAllowedImageSourcePrefixes() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/+$/, "");
+
+  return [
+    "/orion-images/",
+    supabaseUrl ? `${supabaseUrl}/storage/v1/object/public/orion-images/` : null,
+  ].filter((prefix): prefix is string => Boolean(prefix));
+}
 
 function normalizeImages(input: unknown, fallbackAltPrefix: string) {
   if (!Array.isArray(input)) return [] as ImageItem[];
+
+  const allowedPrefixes = getAllowedImageSourcePrefixes();
 
   return input
     .filter((item): item is Partial<ImageItem> => typeof item === "object" && item !== null)
@@ -22,7 +32,29 @@ function normalizeImages(input: unknown, fallbackAltPrefix: string) {
           ? item.alt.trim()
           : `${fallbackAltPrefix} ${index + 1}`,
     }))
-    .filter((item) => item.src.startsWith("/orion-images/"));
+    .filter((item) => allowedPrefixes.some((prefix) => item.src.startsWith(prefix)));
+}
+
+async function fetchLayout(): Promise<{ heroImages: ImageItem[]; galleryImages: ImageItem[] }> {
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.storage.from(IMAGES_BUCKET).download(LAYOUT_FILE);
+
+  if (error || !data) {
+    return { heroImages: [], galleryImages: [] };
+  }
+
+  try {
+    const layout = JSON.parse(await data.text()) as {
+      heroImages?: ImageItem[];
+      galleryImages?: ImageItem[];
+    };
+    return {
+      heroImages: Array.isArray(layout.heroImages) ? layout.heroImages : [],
+      galleryImages: Array.isArray(layout.galleryImages) ? layout.galleryImages : [],
+    };
+  } catch {
+    return { heroImages: [], galleryImages: [] };
+  }
 }
 
 export async function GET() {
@@ -30,16 +62,8 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
 
-  const raw = await readFile(CONTENT_PATH, "utf8");
-  const content = JSON.parse(raw) as {
-    heroImages?: ImageItem[];
-    galleryImages?: ImageItem[];
-  };
-
-  return NextResponse.json({
-    heroImages: Array.isArray(content.heroImages) ? content.heroImages : [],
-    galleryImages: Array.isArray(content.galleryImages) ? content.galleryImages : [],
-  });
+  const layout = await fetchLayout();
+  return NextResponse.json(layout);
 }
 
 export async function PUT(request: Request) {
@@ -52,16 +76,21 @@ export async function PUT(request: Request) {
     galleryImages?: unknown;
   };
 
-  const raw = await readFile(CONTENT_PATH, "utf8");
-  const content = JSON.parse(raw) as Record<string, unknown>;
-
   const heroImages = normalizeImages(payload.heroImages, "Hero image").slice(0, 2);
   const galleryImages = normalizeImages(payload.galleryImages, "Gallery image").slice(0, 30);
 
-  content.heroImages = heroImages;
-  content.galleryImages = galleryImages;
+  const layout = { heroImages, galleryImages };
+  const blob = new Blob([JSON.stringify(layout)], { type: "application/json" });
 
-  await writeFile(CONTENT_PATH, `${JSON.stringify(content, null, 2)}\n`, "utf8");
+  const supabase = getSupabaseAdminClient();
+  const { error } = await supabase.storage
+    .from(IMAGES_BUCKET)
+    .upload(LAYOUT_FILE, blob, { contentType: "application/json", upsert: true });
+
+  if (error) {
+    console.error("Supabase layout save error:", error);
+    return NextResponse.json({ error: "Failed to save layout." }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, heroImages, galleryImages });
 }

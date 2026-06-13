@@ -14,10 +14,30 @@ type SiteContent = {
     phonePrimary: string;
     whatsapp: string;
   };
-  heroImages: Array<{ src: string; alt: string }>;
-  galleryImages?: Array<{ src: string; alt: string }>;
   reviews: Array<{ name: string; role: string; rating: number; text: string }>;
 };
+
+type ImageItem = { src: string; alt: string };
+
+async function getImageLayout(): Promise<{ heroImages: ImageItem[]; galleryImages: ImageItem[] }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/+$/, "");
+  if (!supabaseUrl) return { heroImages: [], galleryImages: [] };
+
+  try {
+    const res = await fetch(
+      `${supabaseUrl}/storage/v1/object/public/orion-images/_layout.json`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return { heroImages: [], galleryImages: [] };
+    const layout = (await res.json()) as { heroImages?: ImageItem[]; galleryImages?: ImageItem[] };
+    return {
+      heroImages: Array.isArray(layout.heroImages) ? layout.heroImages : [],
+      galleryImages: Array.isArray(layout.galleryImages) ? layout.galleryImages : [],
+    };
+  } catch {
+    return { heroImages: [], galleryImages: [] };
+  }
+}
 
 function getWhatsAppLink(number: string, message: string) {
   return `https://wa.me/${number.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
@@ -55,10 +75,12 @@ const dealItems = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
   const content = JSON.parse(
     readFileSync(path.join(process.cwd(), "data/content.json"), "utf8")
   ) as SiteContent;
+
+  const { heroImages, galleryImages } = await getImageLayout();
 
   const phoneHref = `tel:${content.business.phonePrimary.replace(/\s+/g, "")}`;
   const whatsappHref = getWhatsAppLink(
@@ -67,13 +89,11 @@ export default function Home() {
   );
   const googleBusinessHref = content.business.googleBusinessUrl || content.business.directionsUrl;
 
-  const galleryImages = content.galleryImages || [];
-
   return (
     <main className="pb-28">
       <Header phoneHref={phoneHref} />
 
-      {content.heroImages.length > 0 ? (
+      {heroImages.length > 0 ? (
         <section id="hero" className="page-shell pt-5 md:pt-8">
           <div className="hero-panel grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
             <div>
@@ -97,7 +117,7 @@ export default function Home() {
               </div>
             </div>
 
-            <ImageGallery images={content.heroImages.slice(0, 2)} variant="hero" />
+            <ImageGallery images={heroImages} variant="hero" />
           </div>
         </section>
       ) : null}
