@@ -347,8 +347,14 @@ export default function AdminDashboard() {
         <header className="rounded-2xl border border-[var(--line)] bg-white p-5">
           <h1 className="text-2xl font-bold text-[var(--foreground)]">Admin - Orion Computers</h1>
           <p className="mt-1 text-sm text-[var(--muted)]">Upload/remove images and choose which ones appear on the homepage.</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-3">
             <a href="/" className="inline-flex text-sm font-semibold text-[var(--primary-dark)] underline">Back to website</a>
+            <a href="/admin/hero-images" className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--primary-dark)] underline">
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+              Hero Images
+            </a>
             <button type="button" onClick={onLogout} className="text-sm font-semibold text-[#a33a3a] underline" disabled={isBusy}>
               Logout
             </button>

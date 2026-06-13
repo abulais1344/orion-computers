@@ -24,3 +24,4 @@ export function getSupabaseAdminClient() {
 }
 
 export const IMAGES_BUCKET = "orion-images";
+export const HERO_IMAGES_BUCKET = "hero-images";

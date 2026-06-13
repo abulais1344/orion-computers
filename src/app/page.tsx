@@ -5,6 +5,7 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { ReviewMarquee } from "@/components/ReviewMarquee";
 import { BrandTicker } from "@/components/BrandTicker";
 import { ScrollAnimator } from "@/components/ScrollAnimator";
+import { getSupabaseAdminClient } from "@/lib/supabase-admin";
 
 type SiteContent = {
   business: {
@@ -21,20 +22,45 @@ type SiteContent = {
 
 type ImageItem = { src: string; alt: string };
 
-async function getImageLayout(): Promise<{ heroImages: ImageItem[] }> {
+async function getHeroSlides(): Promise<ImageItem[]> {
+  // Try hero_images table first (new system)
+  try {
+    const supabase = getSupabaseAdminClient();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = await (supabase as any)
+      .from("hero_images")
+      .select("image_url, caption")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true })
+      .order("created_at", { ascending: true }) as {
+        data: Array<{ image_url: string; caption: string | null }> | null;
+        error: unknown;
+      };
+
+    if (!error && data && data.length > 0) {
+      return data.map((row, i) => ({
+        src: row.image_url,
+        alt: row.caption ?? `Hero image ${i + 1}`,
+      }));
+    }
+  } catch {
+    // fall through to legacy
+  }
+
+  // Fall back to _layout.json in Supabase storage (existing system)
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/+$/, "");
-  if (!supabaseUrl) return { heroImages: [] };
+  if (!supabaseUrl) return [];
 
   try {
     const res = await fetch(
       `${supabaseUrl}/storage/v1/object/public/orion-images/_layout.json`,
       { cache: "no-store" }
     );
-    if (!res.ok) return { heroImages: [] };
+    if (!res.ok) return [];
     const layout = (await res.json()) as { heroImages?: ImageItem[] };
-    return { heroImages: Array.isArray(layout.heroImages) ? layout.heroImages : [] };
+    return Array.isArray(layout.heroImages) ? layout.heroImages : [];
   } catch {
-    return { heroImages: [] };
+    return [];
   }
 }
 
@@ -109,7 +135,7 @@ export default async function Home() {
     readFileSync(path.join(process.cwd(), "data/content.json"), "utf8")
   ) as SiteContent;
 
-  const { heroImages } = await getImageLayout();
+  const heroImages = await getHeroSlides();
 
   const phoneHref = `tel:${content.business.phonePrimary.replace(/\s+/g, "")}`;
   const whatsappHref = getWhatsAppLink(

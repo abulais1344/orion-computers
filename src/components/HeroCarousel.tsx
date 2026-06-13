@@ -40,6 +40,21 @@ export function HeroCarousel({ slides, phoneHref, whatsappHref }: HeroCarouselPr
   }
 
   const hasImages = slides.length > 0 && slides.some((s) => s.src);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!mounted) {
+    return (
+      <div
+        className="relative w-full animate-pulse bg-[#0d3d21]"
+        style={{ minHeight: "560px" }}
+        aria-hidden
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/30" />
+      </div>
+    );
+  }
 
   return (
     <section className="relative w-full overflow-hidden bg-[#0d3d21]" style={{ minHeight: "560px" }}>
